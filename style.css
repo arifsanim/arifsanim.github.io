@@ -1,42 +1,49 @@
+/* =====================================================================
+   Academic portfolio — "printed scientific figure" direction
+   Serif display (Newsreader) · sans body (IBM Plex Sans) · mono labels
+   Accent drawn from the viridis colormap · contour-line hero signature
+   Drop-in replacement: uses only the existing class hooks, no HTML changes
+   ===================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
 :root {
-  --navy: #0b2a5b;
-  --blue: #2563eb;
-  --light-blue: #dbeafe;
-  --text: #1f2937;
-  --muted: #5b6472;
-  --bg: #f4f7fb;
-  --card: rgba(255, 255, 255, 0.9);
-  --border: rgba(229, 231, 235, 0.9);
-  --shadow: 0 12px 35px rgba(15, 23, 42, 0.08);
-  --shadow-soft: 0 8px 24px rgba(15, 23, 42, 0.06);
+  --paper: #f3f6f4;        /* cool paper, not navy, not cream */
+  --panel: #fbfcfb;        /* cards + hero plate */
+  --ink: #161d1c;          /* near-black text */
+  --body: #333d3b;         /* long-form body */
+  --muted: #5a6764;        /* secondary text */
+  --line: #dde3e0;         /* hairlines */
+  --line-strong: #c9d1ce;  /* framed borders */
+  --indigo: #3a366b;       /* viridis low — contour lines */
+  --teal: #15756c;         /* viridis mid — accent */
+  --teal-deep: #0f5b54;    /* accent for text (AA on paper) */
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  font-family: Inter, Arial, sans-serif;
-  background:
-    radial-gradient(circle at top right, rgba(37, 99, 235, 0.08), transparent 28%),
-    radial-gradient(circle at bottom left, rgba(11, 42, 91, 0.05), transparent 24%),
-    linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
-  color: var(--text);
+  font-family: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
   text-decoration: none;
-  color: var(--blue);
-  transition: 0.2s ease;
+  color: var(--teal-deep);
+  transition: color 0.18s ease;
 }
 
-a:hover {
-  opacity: 0.88;
+a:hover { color: var(--ink); }
+
+:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 
 /* ---------------- NAVBAR ---------------- */
@@ -50,48 +57,51 @@ a:hover {
   align-items: center;
   justify-content: space-between;
   gap: 18px;
+  flex-wrap: wrap;
 
-  padding: 14px 6vw;
+  padding: 15px 6vw;
 
-  background: linear-gradient(135deg, rgba(8, 27, 58, 0.98), rgba(11, 42, 91, 0.98));
-  backdrop-filter: blur(10px);
-
-  color: white;
-  box-shadow: 0 2px 18px rgba(0, 0, 0, 0.12);
+  background: rgba(243, 246, 244, 0.85);
+  backdrop-filter: saturate(1.1) blur(10px);
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
 }
 
 .brand {
-  width: 48px;
-  height: 48px;
+  width: 42px;
+  height: 42px;
 
-  border-radius: 50%;
+  border-radius: 11px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  font-size: 1.1rem;
-  font-weight: 800;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
 
-  background: linear-gradient(135deg, #60a5fa, #2563eb);
-  color: white;
-
-  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.28);
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: 0 6px 16px rgba(22, 29, 28, 0.18);
 }
 
 .nav {
   display: flex;
-  gap: 22px;
+  gap: 26px;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 .nav a {
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 0.98rem;
-  letter-spacing: 0.02em;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
   position: relative;
-  padding-bottom: 4px;
+  padding-bottom: 3px;
 }
 
 .nav a::after {
@@ -100,175 +110,219 @@ a:hover {
   left: 0;
   bottom: 0;
   width: 0%;
-  height: 2px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.9);
+  height: 1.5px;
+  background: var(--teal);
   transition: width 0.22s ease;
 }
 
-.nav a:hover {
-  color: white;
-}
-
-.nav a:hover::after {
-  width: 100%;
-}
+.nav a:hover { color: var(--ink); }
+.nav a:hover::after { width: 100%; }
 
 /* ---------------- HERO ---------------- */
 
 .hero {
-  padding: 54px 6vw 30px;
+  padding: 56px 6vw 26px;
 }
 
 .hero-inner {
-  max-width: 1200px;
+  max-width: 1180px;
   margin: auto;
+  position: relative;
+  overflow: hidden;
 
   display: grid;
-  grid-template-columns: 340px 1fr;
-  gap: 54px;
+  grid-template-columns: 320px 1fr;
+  gap: 52px;
   align-items: center;
 
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 30px;
-  padding: 42px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 44px;
 
-  box-shadow: var(--shadow);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset,
+              0 20px 50px rgba(22, 29, 28, 0.08);
+
+  animation: rise 0.6s ease both;
+}
+
+/* Signature: faint eigenfunction level-sets haloing the portrait.
+   Two offset contour fields read as topography, not a bullseye. */
+.hero-inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    repeating-radial-gradient(circle at 15% 30%, transparent 0 21px, rgba(58, 54, 107, 0.07) 21px 22px),
+    repeating-radial-gradient(circle at 24% 62%, transparent 0 29px, rgba(21, 117, 108, 0.06) 29px 30px);
+  -webkit-mask-image: linear-gradient(to right, black, transparent 66%);
+          mask-image: linear-gradient(to right, black, transparent 66%);
+}
+
+.hero-inner > * {
+  position: relative;
+  z-index: 1;
 }
 
 .profile-pic {
-  width: 340px;
-  height: 340px;
+  width: 320px;
+  height: 380px;
   object-fit: cover;
-  object-position: center 25%;
-  border-radius: 50%;
-  border: 10px solid white;
-  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.14);
+  object-position: center 22%;
+  border-radius: 16px;
+  border: 1px solid var(--line-strong);
+  background: var(--panel);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02),
+              0 18px 40px rgba(22, 29, 28, 0.14);
 }
 
 .hero-text h1 {
   margin: 0;
-  font-size: clamp(2.5rem, 4vw, 4.4rem);
-  line-height: 1.05;
-  color: var(--navy);
-  letter-spacing: -0.04em;
+  font-family: 'Newsreader', Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(2.6rem, 5vw, 4rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--ink);
 }
 
 .subtitle {
-  margin-top: 16px;
-  font-size: 1.2rem;
+  margin-top: 14px;
+  font-size: 1.12rem;
+  line-height: 1.6;
   color: var(--muted);
-  line-height: 1.7;
-  max-width: 760px;
+  max-width: 62ch;
 }
 
+/* The affiliation / credential line, set as a mono "stamp" */
 .subtitle.blue {
-  color: var(--blue);
-  font-weight: 700;
-  margin-top: 6px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  color: var(--teal-deep);
+  font-weight: 500;
+  margin-top: 14px;
 }
 
 .intro {
-  margin-top: 26px;
-  font-size: 1.05rem;
-  line-height: 1.95;
-  color: #374151;
-  max-width: 760px;
+  margin-top: 22px;
+  font-size: 1.02rem;
+  line-height: 1.85;
+  color: var(--body);
+  max-width: 64ch;
 }
 
 /* ---------------- BUTTON LINKS ---------------- */
 
 .links {
   display: flex;
-  gap: 14px;
+  gap: 12px;
   flex-wrap: wrap;
-  margin-top: 30px;
+  margin-top: 28px;
 }
 
 .links a {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  min-width: 120px;
-  padding: 14px 18px;
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  color: var(--navy);
-  font-weight: 600;
-  box-shadow: var(--shadow-soft);
-  transition: 0.2s ease;
+  gap: 9px;
+  padding: 11px 16px;
+
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+
+  background: var(--panel);
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  color: var(--ink);
+  transition: border-color 0.18s ease, color 0.18s ease;
+}
+
+/* small data-point marker — echoes the section headings */
+.links a::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--teal);
+  flex: 0 0 auto;
 }
 
 .links a:hover {
-  transform: translateY(-2px);
-  border-color: rgba(37, 99, 235, 0.4);
-  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.08);
+  border-color: var(--teal);
+  color: var(--teal-deep);
 }
 
 /* ---------------- GRID ---------------- */
 
 .grid {
-  max-width: 1200px;
+  max-width: 1180px;
   margin: auto;
-  padding: 22px 6vw 72px;
+  padding: 24px 6vw 76px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  gap: 22px;
 }
 
 /* ---------------- CARD ---------------- */
 
 .card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  padding: 30px;
-  box-shadow: var(--shadow-soft);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 30px 32px;
+  box-shadow: 0 14px 30px rgba(22, 29, 28, 0.05);
 }
 
-.card.wide {
-  grid-column: 1 / -1;
-}
+.card.wide { grid-column: 1 / -1; }
 
 .card h2 {
-  margin-top: 0;
-  margin-bottom: 22px;
-  font-size: 1.55rem;
-  color: var(--navy);
-  position: relative;
-  letter-spacing: -0.02em;
+  margin: 0 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  font-family: 'Newsreader', Georgia, serif;
+  font-weight: 500;
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+  color: var(--ink);
 }
 
-.card h2::after {
+/* a highlighted observation replaces the generic gradient underline */
+.card h2::before {
   content: "";
-  display: block;
-  width: 54px;
-  height: 4px;
-  margin-top: 12px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--blue), #93c5fd);
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 0 4px rgba(21, 117, 108, 0.12);
+  flex: 0 0 auto;
 }
 
 .card p {
-  line-height: 1.9;
-  color: #374151;
-  margin-top: 0;
+  line-height: 1.8;
+  color: var(--body);
+  margin: 0 0 14px;
 }
 
 .card ul {
-  padding-left: 22px;
-  line-height: 2;
+  padding-left: 20px;
+  line-height: 1.9;
   margin: 0;
+  color: var(--body);
 }
+
+.card li { margin-bottom: 6px; }
 
 /* ---------------- PUBLICATIONS ---------------- */
 
 .publication {
-  margin-bottom: 26px;
-  padding-bottom: 18px;
-  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
 }
 
 .publication:last-child {
@@ -278,31 +332,58 @@ a:hover {
 }
 
 .paper-title {
-  font-weight: 700;
-  color: var(--navy);
-  font-size: 1.04rem;
-  line-height: 1.7;
+  font-weight: 600;
+  color: var(--ink);
+  font-size: 1.02rem;
+  line-height: 1.55;
   margin-bottom: 8px;
 }
 
 .paper-authors {
-  color: #555;
-  margin-bottom: 5px;
+  color: var(--muted);
+  font-size: 0.96rem;
+  line-height: 1.6;
+  margin-bottom: 6px;
 }
 
+/* set the venue like a citation key */
 .paper-journal {
-  color: var(--blue);
-  font-weight: 600;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  color: var(--teal-deep);
+  font-weight: 500;
 }
 
 /* ---------------- FOOTER ---------------- */
 
 .footer {
-  padding: 26px 16px;
+  padding: 30px 16px;
   text-align: center;
-  background: linear-gradient(135deg, #081b3a, #0b2a5b);
-  color: white;
-  margin-top: 10px;
+  background: var(--paper);
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  margin-top: 8px;
+}
+
+/* ---------------- MOTION ---------------- */
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* ---------------- RESPONSIVE ---------------- */
@@ -311,38 +392,32 @@ a:hover {
   .hero-inner {
     grid-template-columns: 1fr;
     text-align: center;
-    padding: 32px 22px;
+    padding: 30px 22px;
+    gap: 26px;
+  }
+
+  .hero-inner::before {
+    -webkit-mask-image: linear-gradient(to bottom, black, transparent 58%);
+            mask-image: linear-gradient(to bottom, black, transparent 58%);
   }
 
   .profile-pic {
-    width: 240px;
-    height: 240px;
+    width: 230px;
+    height: 270px;
     margin: auto;
   }
 
-  .links {
-    justify-content: center;
-  }
-
-  .grid {
-    grid-template-columns: 1fr;
-  }
-
-  .card.wide {
-    grid-column: auto;
-  }
-
-  .nav {
-    justify-content: center;
-  }
-
-  .topbar {
-    flex-direction: column;
-    gap: 14px;
-  }
-
+  .subtitle,
   .intro {
     margin-left: auto;
     margin-right: auto;
   }
+
+  .links { justify-content: center; }
+
+  .grid { grid-template-columns: 1fr; }
+
+  .card.wide { grid-column: auto; }
+
+  .nav { gap: 16px; }
 }
