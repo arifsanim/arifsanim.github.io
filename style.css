@@ -1,23 +1,25 @@
 /* =====================================================================
-   Academic portfolio — "printed scientific figure" direction
-   Serif display (Newsreader) · sans body (IBM Plex Sans) · mono labels
-   Accent drawn from the viridis colormap · contour-line hero signature
-   Drop-in replacement: uses only the existing class hooks, no HTML changes
+   Md. Ariful Islam Sanim — academic portfolio
+   "Printed scientific figure" direction
+   Newsreader (serif display) · IBM Plex Sans (body) · IBM Plex Mono (labels)
+   Accent from the viridis colormap · contour-line hero signature
+   Motif: the "plotted observation" — a data-point dot recurs as the
+   marker for headings, links, timeline nodes, and chips.
    ===================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
 :root {
-  --paper: #f3f6f4;        /* cool paper, not navy, not cream */
-  --panel: #fbfcfb;        /* cards + hero plate */
-  --ink: #161d1c;          /* near-black text */
-  --body: #333d3b;         /* long-form body */
-  --muted: #5a6764;        /* secondary text */
-  --line: #dde3e0;         /* hairlines */
-  --line-strong: #c9d1ce;  /* framed borders */
-  --indigo: #3a366b;       /* viridis low — contour lines */
-  --teal: #15756c;         /* viridis mid — accent */
-  --teal-deep: #0f5b54;    /* accent for text (AA on paper) */
+  --paper: #f3f6f4;
+  --panel: #fbfcfb;
+  --ink: #161d1c;
+  --body: #333d3b;
+  --muted: #5a6764;
+  --line: #dde3e0;
+  --line-strong: #c9d1ce;
+  --indigo: #3a366b;      /* viridis low — contour lines */
+  --teal: #15756c;        /* viridis mid — accent */
+  --teal-deep: #0f5b54;   /* accent for text (AA on paper) */
 }
 
 * { box-sizing: border-box; }
@@ -37,7 +39,6 @@ a {
   color: var(--teal-deep);
   transition: color 0.18s ease;
 }
-
 a:hover { color: var(--ink); }
 
 :focus-visible {
@@ -46,21 +47,22 @@ a:hover { color: var(--ink); }
   border-radius: 4px;
 }
 
+/* Offset in-page anchors so the sticky header doesn't cover section tops */
+section[id],
+.card[id] { scroll-margin-top: 90px; }
+
 /* ---------------- NAVBAR ---------------- */
 
 .topbar {
   position: sticky;
   top: 0;
   z-index: 1000;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 18px;
   flex-wrap: wrap;
-
   padding: 15px 6vw;
-
   background: rgba(243, 246, 244, 0.85);
   backdrop-filter: saturate(1.1) blur(10px);
   border-bottom: 1px solid var(--line);
@@ -70,18 +72,14 @@ a:hover { color: var(--ink); }
 .brand {
   width: 42px;
   height: 42px;
-
   border-radius: 11px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   font-family: 'IBM Plex Mono', monospace;
   font-weight: 600;
   font-size: 0.95rem;
   letter-spacing: 0.02em;
-
   background: var(--ink);
   color: var(--paper);
   box-shadow: 0 6px 16px rgba(22, 29, 28, 0.18);
@@ -89,21 +87,19 @@ a:hover { color: var(--ink); }
 
 .nav {
   display: flex;
-  gap: 26px;
+  gap: 24px;
   flex-wrap: wrap;
   justify-content: center;
 }
-
 .nav a {
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--muted);
   position: relative;
   padding-bottom: 3px;
 }
-
 .nav a::after {
   content: "";
   position: absolute;
@@ -114,40 +110,32 @@ a:hover { color: var(--ink); }
   background: var(--teal);
   transition: width 0.22s ease;
 }
-
 .nav a:hover { color: var(--ink); }
 .nav a:hover::after { width: 100%; }
 
 /* ---------------- HERO ---------------- */
 
-.hero {
-  padding: 56px 6vw 26px;
-}
+.hero { padding: 56px 6vw 26px; }
 
 .hero-inner {
   max-width: 1180px;
   margin: auto;
   position: relative;
   overflow: hidden;
-
   display: grid;
   grid-template-columns: 320px 1fr;
   gap: 52px;
   align-items: center;
-
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 22px;
   padding: 44px;
-
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset,
               0 20px 50px rgba(22, 29, 28, 0.08);
-
   animation: rise 0.6s ease both;
 }
 
-/* Signature: faint eigenfunction level-sets haloing the portrait.
-   Two offset contour fields read as topography, not a bullseye. */
+/* Signature: faint eigenfunction level-sets haloing the portrait. */
 .hero-inner::before {
   content: "";
   position: absolute;
@@ -160,11 +148,7 @@ a:hover { color: var(--ink); }
   -webkit-mask-image: linear-gradient(to right, black, transparent 66%);
           mask-image: linear-gradient(to right, black, transparent 66%);
 }
-
-.hero-inner > * {
-  position: relative;
-  z-index: 1;
-}
+.hero-inner > * { position: relative; z-index: 1; }
 
 .profile-pic {
   width: 320px;
@@ -182,65 +166,59 @@ a:hover { color: var(--ink); }
   margin: 0;
   font-family: 'Newsreader', Georgia, serif;
   font-weight: 500;
-  font-size: clamp(2.6rem, 5vw, 4rem);
-  line-height: 1.02;
+  font-size: clamp(2.5rem, 5vw, 3.9rem);
+  line-height: 1.03;
   letter-spacing: -0.02em;
   color: var(--ink);
 }
 
 .subtitle {
-  margin-top: 14px;
-  font-size: 1.12rem;
-  line-height: 1.6;
+  margin-top: 12px;
+  font-size: 1.08rem;
+  line-height: 1.55;
   color: var(--muted);
   max-width: 62ch;
 }
-
-/* The affiliation / credential line, set as a mono "stamp" */
 .subtitle.blue {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 0.82rem;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   color: var(--teal-deep);
   font-weight: 500;
-  margin-top: 14px;
+  margin-top: 10px;
 }
 
 .intro {
-  margin-top: 22px;
+  margin-top: 20px;
   font-size: 1.02rem;
   line-height: 1.85;
   color: var(--body);
   max-width: 64ch;
 }
+.intro a { font-weight: 500; }
 
-/* ---------------- BUTTON LINKS ---------------- */
+/* ---------------- LINKS / BUTTONS ---------------- */
 
 .links {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
-  margin-top: 28px;
+  margin-top: 26px;
 }
-
 .links a {
   display: inline-flex;
   align-items: center;
   gap: 9px;
   padding: 11px 16px;
-
   font-family: 'IBM Plex Mono', monospace;
   font-size: 0.82rem;
   letter-spacing: 0.02em;
-
   background: var(--panel);
   border: 1px solid var(--line-strong);
   border-radius: 10px;
   color: var(--ink);
-  transition: border-color 0.18s ease, color 0.18s ease;
+  transition: border-color 0.18s ease, color 0.18s ease, background 0.18s ease;
 }
-
-/* small data-point marker — echoes the section headings */
 .links a::before {
   content: "";
   width: 6px;
@@ -249,13 +227,24 @@ a:hover { color: var(--ink); }
   background: var(--teal);
   flex: 0 0 auto;
 }
-
 .links a:hover {
   border-color: var(--teal);
   color: var(--teal-deep);
 }
+/* primary action (CV) */
+.links a.primary {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+.links a.primary::before { background: var(--paper); }
+.links a.primary:hover {
+  background: var(--teal-deep);
+  border-color: var(--teal-deep);
+  color: var(--paper);
+}
 
-/* ---------------- GRID ---------------- */
+/* ---------------- GRID + CARDS ---------------- */
 
 .grid {
   max-width: 1180px;
@@ -264,9 +253,8 @@ a:hover { color: var(--ink); }
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 22px;
+  align-items: start;
 }
-
-/* ---------------- CARD ---------------- */
 
 .card {
   background: var(--panel);
@@ -275,23 +263,19 @@ a:hover { color: var(--ink); }
   padding: 30px 32px;
   box-shadow: 0 14px 30px rgba(22, 29, 28, 0.05);
 }
-
 .card.wide { grid-column: 1 / -1; }
 
 .card h2 {
-  margin: 0 0 20px;
+  margin: 0 0 22px;
   display: flex;
   align-items: center;
   gap: 12px;
-
   font-family: 'Newsreader', Georgia, serif;
   font-weight: 500;
   font-size: 1.5rem;
   letter-spacing: -0.01em;
   color: var(--ink);
 }
-
-/* a highlighted observation replaces the generic gradient underline */
 .card h2::before {
   content: "";
   width: 9px;
@@ -302,51 +286,167 @@ a:hover { color: var(--ink); }
   flex: 0 0 auto;
 }
 
-.card p {
-  line-height: 1.8;
-  color: var(--body);
-  margin: 0 0 14px;
-}
-
-.card ul {
-  padding-left: 20px;
-  line-height: 1.9;
-  margin: 0;
-  color: var(--body);
-}
-
+.card p { line-height: 1.75; color: var(--body); margin: 0 0 14px; }
+.card p:last-child { margin-bottom: 0; }
+.card strong { color: var(--ink); font-weight: 600; }
+.card ul { padding-left: 20px; line-height: 1.9; margin: 0; color: var(--body); }
 .card li { margin-bottom: 6px; }
 
-/* ---------------- PUBLICATIONS ---------------- */
+/* ---------------- CHIPS (interests / skills) ---------------- */
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  padding: 7px 13px;
+}
+.chip::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--teal);
+  flex: 0 0 auto;
+}
+.chip-group + .chip-group { margin-top: 20px; }
+.chip-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 10px;
+}
+
+/* ---------------- FOCUS LIST (dissertation topics) ---------------- */
+
+.focus-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.focus-list li {
+  position: relative;
+  padding-left: 22px;
+  line-height: 1.6;
+  color: var(--body);
+}
+.focus-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--teal);
+}
+.focus-list strong { color: var(--ink); }
+
+/* ---------------- TIMELINE (education / experience / leadership) ---- */
+
+.timeline { display: flex; flex-direction: column; }
+.tl-item {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 20px;
+}
+.tl-year {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.01em;
+  color: var(--teal-deep);
+  padding-top: 3px;
+}
+.tl-body {
+  position: relative;
+  padding-left: 24px;
+  padding-bottom: 24px;
+  border-left: 1px solid var(--line);
+}
+.tl-item:last-child .tl-body {
+  border-left-color: transparent;
+  padding-bottom: 2px;
+}
+.tl-body::before {
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: 5px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 0 3px var(--panel), 0 0 0 6px rgba(21, 117, 108, 0.14);
+}
+.tl-title { font-weight: 600; color: var(--ink); font-size: 1.02rem; line-height: 1.4; }
+.tl-org { color: var(--muted); font-size: 0.95rem; margin-top: 3px; line-height: 1.5; }
+.tl-note { color: var(--body); font-size: 0.92rem; margin-top: 6px; line-height: 1.6; }
+
+/* ---------------- AWARDS ---------------- */
+
+.award-list { display: flex; flex-direction: column; gap: 14px; }
+.award-item {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 16px;
+  align-items: baseline;
+}
+.award-year {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--teal-deep);
+}
+.award-name { color: var(--body); font-size: 0.98rem; line-height: 1.5; }
+.award-name strong { color: var(--ink); font-weight: 600; }
+
+/* ---------------- PUBLICATIONS / PRESENTATIONS ---------------- */
 
 .publication {
   margin-bottom: 24px;
   padding-bottom: 20px;
   border-bottom: 1px solid var(--line);
 }
+.publication:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
 
-.publication:last-child {
-  margin-bottom: 0;
-  padding-bottom: 0;
-  border-bottom: none;
+.pub-tag {
+  display: inline-block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--teal-deep);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  padding: 3px 9px;
+  margin-bottom: 11px;
 }
-
 .paper-title {
   font-weight: 600;
   color: var(--ink);
-  font-size: 1.02rem;
-  line-height: 1.55;
+  font-size: 1.04rem;
+  line-height: 1.5;
   margin-bottom: 8px;
 }
-
-.paper-authors {
-  color: var(--muted);
-  font-size: 0.96rem;
-  line-height: 1.6;
-  margin-bottom: 6px;
-}
-
-/* set the venue like a citation key */
+.paper-authors { color: var(--muted); font-size: 0.96rem; line-height: 1.6; margin-bottom: 6px; }
+.paper-authors strong { color: var(--ink); font-weight: 600; }
 .paper-journal {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 0.82rem;
@@ -375,11 +475,8 @@ a:hover { color: var(--ink); }
   from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: none; }
 }
-
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation: none !important;
     transition: none !important;
     scroll-behavior: auto !important;
@@ -395,29 +492,21 @@ a:hover { color: var(--ink); }
     padding: 30px 22px;
     gap: 26px;
   }
-
   .hero-inner::before {
     -webkit-mask-image: linear-gradient(to bottom, black, transparent 58%);
             mask-image: linear-gradient(to bottom, black, transparent 58%);
   }
-
-  .profile-pic {
-    width: 230px;
-    height: 270px;
-    margin: auto;
-  }
-
-  .subtitle,
-  .intro {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
+  .profile-pic { width: 230px; height: 270px; margin: auto; }
+  .subtitle, .intro { margin-left: auto; margin-right: auto; }
   .links { justify-content: center; }
-
+  .chips { justify-content: flex-start; }
   .grid { grid-template-columns: 1fr; }
-
   .card.wide { grid-column: auto; }
+  .nav { gap: 14px; }
+}
 
-  .nav { gap: 16px; }
+@media (max-width: 520px) {
+  .tl-item { grid-template-columns: 74px 1fr; gap: 14px; }
+  .award-item { grid-template-columns: 46px 1fr; gap: 12px; }
+  .card { padding: 26px 22px; }
 }
